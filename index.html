@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>Flappy Breeze</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="game">
+      <header class="hud" aria-live="polite">
+        <div class="hud__score">Score: <span id="score">0</span></div>
+        <div class="hud__best">Best: <span id="best-score">0</span></div>
+      </header>
+      <canvas id="game-canvas" aria-label="Flappy Bird clone game" role="img"></canvas>
+      <section class="overlay" id="overlay" aria-live="polite">
+        <div class="overlay__card">
+          <h1>Flappy Breeze</h1>
+          <p>Tap or press space to flap. Avoid the pipes.</p>
+          <button id="start-button" type="button">Start</button>
+        </div>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
