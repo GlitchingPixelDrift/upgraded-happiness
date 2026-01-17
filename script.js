@@ -208,20 +208,45 @@ function draw() {
   ctx.save();
   ctx.translate(bird.x, bird.y);
   ctx.rotate(Math.min(Math.max(bird.velocity / 600, -0.6), 0.6));
-  ctx.fillStyle = colors.bird;
-  ctx.beginPath();
-  ctx.arc(0, 0, bird.radius, 0, Math.PI * 2);
-  ctx.fill();
 
-  ctx.fillStyle = colors.birdAccent;
-  ctx.beginPath();
-  ctx.arc(8, -6, bird.radius * 0.35, 0, Math.PI * 2);
-  ctx.fill();
+  const pixelSize = Math.max(2, Math.floor(bird.radius / 6));
+  const pineapple = [
+    [0, 0, 0, 2, 0, 0, 0],
+    [0, 0, 2, 3, 2, 0, 0],
+    [0, 2, 2, 3, 2, 2, 0],
+    [0, 2, 1, 1, 1, 2, 0],
+    [2, 1, 1, 4, 1, 1, 2],
+    [2, 1, 4, 4, 4, 1, 2],
+    [2, 1, 4, 4, 4, 1, 2],
+    [2, 1, 1, 4, 1, 1, 2],
+    [0, 2, 1, 1, 1, 2, 0],
+    [0, 0, 2, 2, 2, 0, 0],
+  ];
 
-  ctx.fillStyle = "#ffffff";
-  ctx.beginPath();
-  ctx.arc(6, -4, bird.radius * 0.18, 0, Math.PI * 2);
-  ctx.fill();
+  const pineappleColors = {
+    1: "#f4c542",
+    2: "#d48a1b",
+    3: "#2faa6c",
+    4: "#f4e17a",
+  };
+
+  const offsetX = -(pineapple[0].length * pixelSize) / 2;
+  const offsetY = -(pineapple.length * pixelSize) / 2;
+  pineapple.forEach((row, rowIndex) => {
+    row.forEach((cell, colIndex) => {
+      if (cell === 0) {
+        return;
+      }
+      ctx.fillStyle = pineappleColors[cell];
+      ctx.fillRect(
+        offsetX + colIndex * pixelSize,
+        offsetY + rowIndex * pixelSize,
+        pixelSize,
+        pixelSize
+      );
+    });
+  });
+
   ctx.restore();
 }
 
