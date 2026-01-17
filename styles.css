@@ -45,10 +45,52 @@ canvas {
   right: 16px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 12px;
   z-index: 2;
   font-weight: 600;
   font-size: 0.95rem;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.hud__score {
+  transition: transform 0.2s ease;
+}
+
+.score-pop {
+  animation: score-pop 0.3s ease;
+}
+
+@keyframes score-pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.hud__settings {
+  border: none;
+  background: rgba(255, 255, 255, 0.16);
+  color: #f6f5ff;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.hud__settings:hover,
+.hud__settings:focus-visible {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.28);
 }
 
 .overlay {
@@ -85,6 +127,27 @@ canvas {
   margin-bottom: 18px;
   font-size: 1rem;
   color: rgba(246, 245, 255, 0.8);
+}
+
+.settings {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 20px;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.settings__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(246, 245, 255, 0.9);
+}
+
+.settings__item input {
+  accent-color: #f7c946;
+  width: 18px;
+  height: 18px;
 }
 
 button {
