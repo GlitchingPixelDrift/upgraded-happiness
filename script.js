@@ -179,24 +179,43 @@ function draw() {
   ctx.fillStyle = skyGradient;
   ctx.fillRect(0, 0, width, height);
 
-  pipes.list.forEach((pipe) => {
-    ctx.fillStyle = colors.pipeShadow;
-    ctx.fillRect(pipe.x + 4, 0, pipes.width, pipe.top);
-    ctx.fillRect(
-      pipe.x + 4,
-      pipe.top + pipes.gap,
-      pipes.width,
-      height - pipe.top - pipes.gap
-    );
+  const brickSize = Math.max(10, Math.floor(pipes.width / 4));
+  const brickColors = {
+    base: "#b86b41",
+    shade: "#a85c34",
+    highlight: "#d98a5f",
+  };
 
-    ctx.fillStyle = colors.pipe;
-    ctx.fillRect(pipe.x, 0, pipes.width, pipe.top);
-    ctx.fillRect(
-      pipe.x,
-      pipe.top + pipes.gap,
-      pipes.width,
-      height - pipe.top - pipes.gap
-    );
+  const drawBrickColumn = (x, y, columnHeight) => {
+    const rows = Math.ceil(columnHeight / brickSize);
+    const cols = Math.ceil(pipes.width / brickSize);
+    for (let row = 0; row < rows; row += 1) {
+      for (let col = 0; col < cols; col += 1) {
+        const brickX = x + col * brickSize;
+        const brickY = y + row * brickSize;
+        const brickWidth = Math.min(brickSize, x + pipes.width - brickX);
+        const brickHeight = Math.min(brickSize, y + columnHeight - brickY);
+
+        ctx.fillStyle = brickColors.base;
+        ctx.fillRect(brickX, brickY, brickWidth, brickHeight);
+
+        ctx.fillStyle = brickColors.highlight;
+        ctx.fillRect(brickX + 1, brickY + 1, brickWidth - 2, Math.max(1, brickHeight / 4));
+
+        ctx.fillStyle = brickColors.shade;
+        ctx.fillRect(
+          brickX + Math.max(1, brickWidth - 3),
+          brickY + 2,
+          Math.max(1, brickWidth / 6),
+          Math.max(1, brickHeight - 4)
+        );
+      }
+    }
+  };
+
+  pipes.list.forEach((pipe) => {
+    drawBrickColumn(pipe.x, 0, pipe.top);
+    drawBrickColumn(pipe.x, pipe.top + pipes.gap, height - pipe.top - pipes.gap);
   });
 
   const groundHeight = height * 0.12;
