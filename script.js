@@ -219,10 +219,20 @@ function draw() {
   });
 
   const groundHeight = height * 0.12;
-  ctx.fillStyle = colors.ground;
-  ctx.fillRect(0, height - groundHeight, width, groundHeight);
-  ctx.fillStyle = colors.groundHighlight;
-  ctx.fillRect(0, height - groundHeight, width, 12);
+  const groundY = height - groundHeight;
+  const grassPixel = Math.max(6, Math.floor(groundHeight / 6));
+  const grassColors = ["#3fa34d", "#4fb961", "#2f8f3f"];
+
+  for (let y = groundY; y < height; y += grassPixel) {
+    for (let x = 0; x < width; x += grassPixel) {
+      const color = grassColors[(x / grassPixel + y / grassPixel) % grassColors.length];
+      ctx.fillStyle = color;
+      ctx.fillRect(x, y, grassPixel, grassPixel);
+    }
+  }
+
+  ctx.fillStyle = "#67d272";
+  ctx.fillRect(0, groundY, width, Math.max(6, Math.floor(grassPixel / 2)));
 
   ctx.save();
   ctx.translate(bird.x, bird.y);
