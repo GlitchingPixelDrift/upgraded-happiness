@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>Flappy Breeze</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="game">
+      <header class="hud" aria-live="polite">
+        <div class="hud__score">Score: <span id="score">0</span></div>
+        <div class="hud__best">Best: <span id="best-score">0</span></div>
+        <button class="hud__settings" id="settings-button" type="button" aria-label="Open settings">
+          ⚙️
+        </button>
+      </header>
+      <canvas id="game-canvas" aria-label="Flappy Bird clone game" role="img"></canvas>
+      <section class="overlay" id="overlay" aria-live="polite">
+        <div class="overlay__card">
+          <h1>Flappy Breeze</h1>
+          <p>Tap or press space to flap. Avoid the pipes.</p>
+          <div class="settings">
+            <label class="settings__item">
+              <input type="checkbox" id="calm-mode" checked />
+              Calm mode (slower, fewer pipes)
+            </label>
+            <label class="settings__item">
+              <input type="checkbox" id="minimal-mode" />
+              Minimal visuals
+            </label>
+            <label class="settings__item">
+              <input type="checkbox" id="steady-speed" checked />
+              Steady speed
+            </label>
+            <label class="settings__item">
+              <input type="checkbox" id="centered-gaps" />
+              Centered pipe gaps
+            </label>
+            <label class="settings__item">
+              <input type="checkbox" id="fixed-gap" checked />
+              Fixed gap height
+            </label>
+            <label class="settings__item">
+              <input type="checkbox" id="grid-snap" checked />
+              Grid-aligned pipes
+            </label>
+            <label class="settings__item">
+              <input type="checkbox" id="reduced-motion" />
+              Reduced motion
+            </label>
+            <label class="settings__item">
+              <input type="checkbox" id="sound-on" checked />
+              Soft sounds
+            </label>
+          </div>
+          <button id="start-button" type="button">Start</button>
+        </div>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
